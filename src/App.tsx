@@ -10,7 +10,7 @@ const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoianVzdGluLWhvbG1lcyIsImEiOiJja2txMDd4aDQw
 const INITIAL_VIEW_STATE = {
   longitude: -80.92553298898889,
   latitude: 34.07755236737492,
-  zoom: 18,
+  zoom: 20,
   pitch: 0,
   bearing: 0,
   maxZoom: 30
@@ -28,9 +28,9 @@ function App() {
       filled: true,
       extruded: false,
       wireframe: true,
-      lineWidthScale: .1,
+      lineWidthScale: .2,
       lineWidthMinPixels: 1,
-      getFillColor: () => [Math.random() * 255, Math.random() * 255, Math.random() * 255, 255],
+      getFillColor: () => [150, 150, 150, 255],
       getRadius: 100,
       getLineWidth: 1,
       getElevation: 30,
