@@ -7,7 +7,7 @@ import { Amplify, DataStore } from 'aws-amplify';
 import geojson from './data.json';
 import { geoJsonFeatureCollectionToProject, projectToGeoJsonFeatureCollection } from './domainModel/functionalProject';
 import awsconfig from './aws-exports'
-import { Project } from './models';
+import { Project, SiteModel } from './models';
 import { useEffect } from 'react';
 import {FeatureCollection} from 'geojson'
 

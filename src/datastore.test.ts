@@ -1,6 +1,6 @@
 
 import { Amplify, DataStore } from 'aws-amplify';
-import geojson from './datasmall.json'
+import geojson from './dataSmall.json'
 import { Project } from './models';
 import {geoJsonFeatureCollectionToProject, geoJsonFeatureToRoofFacet, projectToGeoJsonFeatureCollection, roofFacetToGeoJsonFeature} from './domainModel/functionalProject'
 import awsconfig from "./aws-exports";
@@ -16,7 +16,7 @@ DataStore.configure({
 jest.setTimeout(30000)
 
 
-function sleep(ms) {
+function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -28,7 +28,7 @@ it('should read and write GeoJSON', async () =>  {
     await DataStore.start()
 
     console.log("befpre")
-    const initialDatabaseResult = await DataStore.query(Project)
+    const initialDatabaseResult = await DataStore.query(Project, p => p.prospectID("eq", '12345'))
     console.log("after")
     const projectLengthInDatabase = initialDatabaseResult.length
 
@@ -48,4 +48,9 @@ it('should read and write GeoJSON', async () =>  {
     // } else {
       // console.log(initialDatabaseResult)
     // } 
+});
+
+it('hello', async () => {
+  console.log(await DataStore.query(Hello))
+
 });

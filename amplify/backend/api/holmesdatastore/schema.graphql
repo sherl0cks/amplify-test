@@ -1,3 +1,8 @@
+
+
+# partition key  (hash key) => 
+# sort key 
+
 type Project @model 
   @key(name: "byProspectID", fields: ["prospectID"], queryField: "listProjectsByProspectId") {
   id: ID!
@@ -11,6 +16,7 @@ type Project @model
 type SiteModel @model 
   @key(name: "byProjectID", fields: ["projectID", "name"], queryField: "listSiteModelsByProjectId"){
   id: ID!
+  
   name: String!
   projectID: ID! 
   trees: [Tree!]
@@ -20,7 +26,8 @@ type SiteModel @model
 
 type Tree {
   id: ID!
-}
+}         
+
 
 type RoofFacet {
   type: String!
@@ -85,3 +92,7 @@ type InverterSelection {
   inverterSpecification: InverterSpecification
   quantity: Int
 }
+
+
+
+
