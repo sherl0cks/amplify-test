@@ -70,6 +70,7 @@ export declare class InverterSpecification {
 export declare class Project {
   readonly id: string;
   readonly prospectID?: string;
+  readonly activeSiteModelName?: string;
   readonly activeSiteModel?: SiteModel;
   readonly siteModels?: SiteModel[];
   readonly activeDesign?: Design;
@@ -81,6 +82,8 @@ export declare class Project {
 export declare class SiteModel {
   readonly id: string;
   readonly name: string;
+  readonly version: number;
+  readonly versionCount: number;
   readonly projectID: string;
   readonly trees?: Tree[];
   readonly roofFacets?: RoofFacet[];

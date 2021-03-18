@@ -1,15 +1,23 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-holmesdatastore-dev-212040-authRole",
-      "UnauthRoleArn": "arn:aws:iam::563116987804:role/amplify-holmesdatastore-dev-212040-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::563116987804:role/amplify-holmesdatastore-dev-212040-authRole",
-      "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-holmesdatastore-dev-212040-deployment",
-      "UnauthRoleName": "amplify-holmesdatastore-dev-212040-unauthRole",
-      "StackName": "amplify-holmesdatastore-dev-212040",
-      "StackId": "arn:aws:cloudformation:us-west-2:563116987804:stack/amplify-holmesdatastore-dev-212040/50996380-82ea-11eb-a5e9-066453b973ed",
-      "AmplifyAppId": "d2b9lautbkld8p"
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-datastore-dev-160817-authRole",
+            "UnauthRoleArn": "arn:aws:iam::563116987804:role/amplify-datastore-dev-160817-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::563116987804:role/amplify-datastore-dev-160817-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-datastore-dev-160817-deployment",
+            "UnauthRoleName": "amplify-datastore-dev-160817-unauthRole",
+            "StackName": "amplify-datastore-dev-160817",
+            "StackId": "arn:aws:cloudformation:us-west-2:563116987804:stack/amplify-datastore-dev-160817/1d5cc670-86a4-11eb-b14d-027f8bacea23",
+            "AmplifyAppId": "d33l7my5as082h"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d33l7my5as082h",
+                    "type": "manual"
+                }
+            }
+        }
     }
-  }
 }

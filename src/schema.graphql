@@ -1,0 +1,111 @@
+# partition key  (hash key) =>
+# sort key
+
+type Project
+  @model
+  @key(
+    name: "byProspectID"
+    fields: ["prospectID"]
+    queryField: "listProjectsByProspectId"
+  ) {
+  id: ID!
+  prospectID: String
+  activeSiteModelId: String
+  activeSiteModelVersion: String
+  activeSiteModel: SiteModel @connection(fields: ["activeSiteModelId", "activeSiteModelVersion"])
+  siteModels: [SiteModel!] @connection(keyName: "byProjectID", fields: ["id"])
+  activeDesign: Design @connection
+  designs: [Design] @connection(keyName: "byProjectID", fields: ["id"])
+}
+
+type SiteModel
+  @model
+  @key(fields: ["name", "version"])
+  @key(
+    name: "byProjectID"
+    fields: ["projectID", "name"]
+    queryField: "listSiteModelsByProjectId"
+  ) {
+  version: String!
+  name: String!
+  projectID: ID!
+  trees: [Tree!]
+  roofFacets: [RoofFacet!]
+  roofObstructions: [RoofObstruction!]
+}
+
+type Tree {
+  id: ID!
+}
+
+type RoofFacet {
+  type: String!
+  geometry: Polygon!
+  properties: RoofFacetProperties!
+  bbox: [Float]
+}
+
+type RoofFacetProperties {
+  id: ID!
+  type: String
+}
+
+type Polygon {
+  type: String!
+  coordinatesString: AWSJSON!
+}
+
+type RoofObstruction {
+  id: ID!
+}
+
+# # Is this one aggregate boundary or should it be broken further.
+type Design
+  @model
+  @key(
+    name: "byProjectID"
+    fields: ["projectID"]
+    queryField: "listDesignsByProjectId"
+  )
+  @key(
+    name: "bySiteModelID"
+    fields: ["siteModelID"]
+    queryField: "listDesignsBySiteModelId"
+  ) {
+  id: ID!
+  projectID: ID!
+  siteModelID: ID!
+  layout: Layout
+  stringing: Stringing
+  # storage
+  # other stuff
+}
+
+type Layout {
+  id: ID!
+  modulePlacements: [ModulePlacement]
+  moduleSpecification: ModuleSpecification
+}
+
+type ModuleSpecification {
+  id: ID!
+}
+
+type ModulePlacement {
+  id: ID!
+}
+
+type Stringing {
+  id: ID!
+  inverterSelections: [InverterSelection]
+}
+
+type InverterSpecification {
+  id: ID!
+}
+
+type InverterSelection {
+  id: ID!
+  inverterSpecification: InverterSpecification
+  quantity: Int
+}

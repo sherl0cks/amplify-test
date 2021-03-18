@@ -1,33 +1,45 @@
+# partition key  (hash key) =>
+# sort key
 
-
-# partition key  (hash key) => 
-# sort key 
-
-type Project @model 
-  @key(name: "byProspectID", fields: ["prospectID"], queryField: "listProjectsByProspectId") {
+type Project
+  @model
+  @key(
+    name: "byProspectID"
+    fields: ["prospectID"]
+    queryField: "listProjectsByProspectId"
+  ) 
+  {
   id: ID!
   prospectID: String
+  activeSiteModelName: String
   activeSiteModel: SiteModel @connection
-  siteModels: [SiteModel!] @connection(keyName: "byProjectID", fields:["id"])
+  siteModels: [SiteModel!] @connection(keyName: "byProjectID", fields: ["id"])
   activeDesign: Design @connection
-  designs: [Design] @connection(keyName: "byProjectID", fields:["id"])
+  designs: [Design] @connection(keyName: "byProjectID", fields: ["id"])
 }
 
-type SiteModel @model 
-  @key(name: "byProjectID", fields: ["projectID", "name"], queryField: "listSiteModelsByProjectId"){
+type SiteModel 
+  @model
+  @key(
+    name: "byProjectID"
+    fields: ["projectID", "name", "version"]
+    queryField: "listSiteModelsByProjectId"
+  )
+{
   id: ID!
-  
   name: String!
-  projectID: ID! 
+  version: Int!
+  versionCount: Int!
+  projectID: ID!
   trees: [Tree!]
   roofFacets: [RoofFacet!]
   roofObstructions: [RoofObstruction!]
 }
 
+
 type Tree {
   id: ID!
-}         
-
+}
 
 type RoofFacet {
   type: String!
@@ -50,11 +62,19 @@ type RoofObstruction {
   id: ID!
 }
 
-
 # # Is this one aggregate boundary or should it be broken further.
-type Design @model 
-  @key(name: "byProjectID", fields: ["projectID"], queryField: "listDesignsByProjectId") 
-  @key(name: "bySiteModelID", fields: ["siteModelID"], queryField: "listDesignsBySiteModelId") {
+type Design
+  @model
+  @key(
+    name: "byProjectID"
+    fields: ["projectID"]
+    queryField: "listDesignsByProjectId"
+  )
+  @key(
+    name: "bySiteModelID"
+    fields: ["siteModelID"]
+    queryField: "listDesignsBySiteModelId"
+  ) {
   id: ID!
   projectID: ID!
   siteModelID: ID!
@@ -65,25 +85,25 @@ type Design @model
 }
 
 type Layout {
-  id : ID!
+  id: ID!
   modulePlacements: [ModulePlacement]
   moduleSpecification: ModuleSpecification
 }
 
 type ModuleSpecification {
-  id : ID!
+  id: ID!
 }
 
-type ModulePlacement{
-  id : ID!
+type ModulePlacement {
+  id: ID!
 }
 
-type Stringing{
-  id : ID!
+type Stringing {
+  id: ID!
   inverterSelections: [InverterSelection]
 }
 
-type InverterSpecification{
+type InverterSpecification {
   id: ID!
 }
 
@@ -92,7 +112,3 @@ type InverterSelection {
   inverterSpecification: InverterSpecification
   quantity: Int
 }
-
-
-
-

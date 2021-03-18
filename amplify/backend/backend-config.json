@@ -1,6 +1,6 @@
 {
   "api": {
-    "holmesdatastore": {
+    "datastore": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -15,6 +15,13 @@
           "additionalAuthenticationProviders": []
         }
       }
+    }
+  },
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "providerPlugin": "awscloudformation",
+      "type": "manual"
     }
   }
 }

@@ -17,6 +17,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "activeSiteModelName": {
+                    "name": "activeSiteModelName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "activeSiteModel": {
                     "name": "activeSiteModel",
                     "isArray": false,
@@ -108,6 +115,20 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "version": {
+                    "name": "version",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "versionCount": {
+                    "name": "versionCount",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "projectID": {
                     "name": "projectID",
                     "isArray": false,
@@ -159,7 +180,8 @@ export const schema = {
                         "name": "byProjectID",
                         "fields": [
                             "projectID",
-                            "name"
+                            "name",
+                            "version"
                         ],
                         "queryField": "listSiteModelsByProjectId"
                     }
@@ -459,5 +481,5 @@ export const schema = {
             }
         }
     },
-    "version": "12c585f8e3b814ce0d435128a4f2ed3c"
+    "version": "be473e620b6b79341c3009c61003abd2"
 };
