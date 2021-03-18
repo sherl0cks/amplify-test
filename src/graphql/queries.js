@@ -17,11 +17,12 @@ export const syncProjects = /* GraphQL */ `
       items {
         id
         prospectID
-        activeSiteModelId
-        activeSiteModelVersion
+        activeSiteModelName
         activeSiteModel {
-          version
+          id
           name
+          version
+          versionCount
           projectID
           _version
           _deleted
@@ -29,6 +30,7 @@ export const syncProjects = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        siteModelNames
         siteModels {
           nextToken
           startedAt
@@ -63,11 +65,12 @@ export const getProject = /* GraphQL */ `
     getProject(id: $id) {
       id
       prospectID
-      activeSiteModelId
-      activeSiteModelVersion
+      activeSiteModelName
       activeSiteModel {
-        version
+        id
         name
+        version
+        versionCount
         projectID
         trees {
           id
@@ -85,10 +88,13 @@ export const getProject = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      siteModelNames
       siteModels {
         items {
-          version
+          id
           name
+          version
+          versionCount
           projectID
           _version
           _deleted
@@ -147,11 +153,12 @@ export const listProjects = /* GraphQL */ `
       items {
         id
         prospectID
-        activeSiteModelId
-        activeSiteModelVersion
+        activeSiteModelName
         activeSiteModel {
-          version
+          id
           name
+          version
+          versionCount
           projectID
           _version
           _deleted
@@ -159,6 +166,7 @@ export const listProjects = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        siteModelNames
         siteModels {
           nextToken
           startedAt
@@ -202,8 +210,10 @@ export const syncSiteModels = /* GraphQL */ `
       lastSync: $lastSync
     ) {
       items {
-        version
+        id
         name
+        version
+        versionCount
         projectID
         trees {
           id
@@ -227,10 +237,12 @@ export const syncSiteModels = /* GraphQL */ `
   }
 `;
 export const getSiteModel = /* GraphQL */ `
-  query GetSiteModel($name: String!, $version: String!) {
-    getSiteModel(name: $name, version: $version) {
-      version
+  query GetSiteModel($id: ID!) {
+    getSiteModel(id: $id) {
+      id
       name
+      version
+      versionCount
       projectID
       trees {
         id
@@ -260,24 +272,16 @@ export const getSiteModel = /* GraphQL */ `
 `;
 export const listSiteModels = /* GraphQL */ `
   query ListSiteModels(
-    $name: String
-    $version: ModelStringKeyConditionInput
     $filter: ModelSiteModelFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listSiteModels(
-      name: $name
-      version: $version
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listSiteModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        version
+        id
         name
+        version
+        versionCount
         projectID
         trees {
           id
@@ -410,11 +414,12 @@ export const listProjectsByProspectId = /* GraphQL */ `
       items {
         id
         prospectID
-        activeSiteModelId
-        activeSiteModelVersion
+        activeSiteModelName
         activeSiteModel {
-          version
+          id
           name
+          version
+          versionCount
           projectID
           _version
           _deleted
@@ -422,6 +427,7 @@ export const listProjectsByProspectId = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        siteModelNames
         siteModels {
           nextToken
           startedAt
@@ -454,7 +460,7 @@ export const listProjectsByProspectId = /* GraphQL */ `
 export const listSiteModelsByProjectId = /* GraphQL */ `
   query ListSiteModelsByProjectId(
     $projectID: ID
-    $name: ModelStringKeyConditionInput
+    $nameVersion: ModelSiteModelByProjectIDCompositeKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelSiteModelFilterInput
     $limit: Int
@@ -462,15 +468,17 @@ export const listSiteModelsByProjectId = /* GraphQL */ `
   ) {
     listSiteModelsByProjectId(
       projectID: $projectID
-      name: $name
+      nameVersion: $nameVersion
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
       nextToken: $nextToken
     ) {
       items {
-        version
+        id
         name
+        version
+        versionCount
         projectID
         trees {
           id

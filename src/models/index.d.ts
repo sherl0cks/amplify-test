@@ -72,6 +72,7 @@ export declare class Project {
   readonly prospectID?: string;
   readonly activeSiteModelName?: string;
   readonly activeSiteModel?: SiteModel;
+  readonly siteModelNames?: string[];
   readonly siteModels?: SiteModel[];
   readonly activeDesign?: Design;
   readonly designs?: (Design | null)[];

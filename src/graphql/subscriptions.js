@@ -6,11 +6,12 @@ export const onCreateProject = /* GraphQL */ `
     onCreateProject {
       id
       prospectID
-      activeSiteModelId
-      activeSiteModelVersion
+      activeSiteModelName
       activeSiteModel {
-        version
+        id
         name
+        version
+        versionCount
         projectID
         trees {
           id
@@ -28,10 +29,13 @@ export const onCreateProject = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      siteModelNames
       siteModels {
         items {
-          version
+          id
           name
+          version
+          versionCount
           projectID
           _version
           _deleted
@@ -85,11 +89,12 @@ export const onUpdateProject = /* GraphQL */ `
     onUpdateProject {
       id
       prospectID
-      activeSiteModelId
-      activeSiteModelVersion
+      activeSiteModelName
       activeSiteModel {
-        version
+        id
         name
+        version
+        versionCount
         projectID
         trees {
           id
@@ -107,10 +112,13 @@ export const onUpdateProject = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      siteModelNames
       siteModels {
         items {
-          version
+          id
           name
+          version
+          versionCount
           projectID
           _version
           _deleted
@@ -164,11 +172,12 @@ export const onDeleteProject = /* GraphQL */ `
     onDeleteProject {
       id
       prospectID
-      activeSiteModelId
-      activeSiteModelVersion
+      activeSiteModelName
       activeSiteModel {
-        version
+        id
         name
+        version
+        versionCount
         projectID
         trees {
           id
@@ -186,10 +195,13 @@ export const onDeleteProject = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      siteModelNames
       siteModels {
         items {
-          version
+          id
           name
+          version
+          versionCount
           projectID
           _version
           _deleted
@@ -241,8 +253,10 @@ export const onDeleteProject = /* GraphQL */ `
 export const onCreateSiteModel = /* GraphQL */ `
   subscription OnCreateSiteModel {
     onCreateSiteModel {
-      version
+      id
       name
+      version
+      versionCount
       projectID
       trees {
         id
@@ -273,8 +287,10 @@ export const onCreateSiteModel = /* GraphQL */ `
 export const onUpdateSiteModel = /* GraphQL */ `
   subscription OnUpdateSiteModel {
     onUpdateSiteModel {
-      version
+      id
       name
+      version
+      versionCount
       projectID
       trees {
         id
@@ -305,8 +321,10 @@ export const onUpdateSiteModel = /* GraphQL */ `
 export const onDeleteSiteModel = /* GraphQL */ `
   subscription OnDeleteSiteModel {
     onDeleteSiteModel {
-      version
+      id
       name
+      version
+      versionCount
       projectID
       trees {
         id

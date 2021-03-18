@@ -9,11 +9,12 @@ export const createProject = /* GraphQL */ `
     createProject(input: $input, condition: $condition) {
       id
       prospectID
-      activeSiteModelId
-      activeSiteModelVersion
+      activeSiteModelName
       activeSiteModel {
-        version
+        id
         name
+        version
+        versionCount
         projectID
         trees {
           id
@@ -31,10 +32,13 @@ export const createProject = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      siteModelNames
       siteModels {
         items {
-          version
+          id
           name
+          version
+          versionCount
           projectID
           _version
           _deleted
@@ -91,11 +95,12 @@ export const updateProject = /* GraphQL */ `
     updateProject(input: $input, condition: $condition) {
       id
       prospectID
-      activeSiteModelId
-      activeSiteModelVersion
+      activeSiteModelName
       activeSiteModel {
-        version
+        id
         name
+        version
+        versionCount
         projectID
         trees {
           id
@@ -113,10 +118,13 @@ export const updateProject = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      siteModelNames
       siteModels {
         items {
-          version
+          id
           name
+          version
+          versionCount
           projectID
           _version
           _deleted
@@ -173,11 +181,12 @@ export const deleteProject = /* GraphQL */ `
     deleteProject(input: $input, condition: $condition) {
       id
       prospectID
-      activeSiteModelId
-      activeSiteModelVersion
+      activeSiteModelName
       activeSiteModel {
-        version
+        id
         name
+        version
+        versionCount
         projectID
         trees {
           id
@@ -195,10 +204,13 @@ export const deleteProject = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      siteModelNames
       siteModels {
         items {
-          version
+          id
           name
+          version
+          versionCount
           projectID
           _version
           _deleted
@@ -253,8 +265,10 @@ export const createSiteModel = /* GraphQL */ `
     $condition: ModelSiteModelConditionInput
   ) {
     createSiteModel(input: $input, condition: $condition) {
-      version
+      id
       name
+      version
+      versionCount
       projectID
       trees {
         id
@@ -288,8 +302,10 @@ export const updateSiteModel = /* GraphQL */ `
     $condition: ModelSiteModelConditionInput
   ) {
     updateSiteModel(input: $input, condition: $condition) {
-      version
+      id
       name
+      version
+      versionCount
       projectID
       trees {
         id
@@ -323,8 +339,10 @@ export const deleteSiteModel = /* GraphQL */ `
     $condition: ModelSiteModelConditionInput
   ) {
     deleteSiteModel(input: $input, condition: $condition) {
-      version
+      id
       name
+      version
+      versionCount
       projectID
       trees {
         id

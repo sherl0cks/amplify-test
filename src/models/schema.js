@@ -37,6 +37,14 @@ export const schema = {
                         "targetName": "projectActiveSiteModelId"
                     }
                 },
+                "siteModelNames": {
+                    "name": "siteModelNames",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
                 "siteModels": {
                     "name": "siteModels",
                     "isArray": true,
@@ -481,5 +489,5 @@ export const schema = {
             }
         }
     },
-    "version": "be473e620b6b79341c3009c61003abd2"
+    "version": "2cc2d03f6bc4ca7143bc3dd454655843"
 };

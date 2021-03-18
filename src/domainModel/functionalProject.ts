@@ -51,22 +51,30 @@ export function geoJsonFeatureToRoofFacet(feature: GeoJsonFeature): RoofFacet {
 }
 
 export function geoJsonFeatureCollectionToProject(
-    featureCollection: FeatureCollection
+    featureCollection: FeatureCollection,
+    siteModelName: string = "default"
 ): Project {
-    const project = new Project({activeSiteModelName: "default"})
-    const siteModel = new SiteModel({
-        name: "default",
-        projectID: project.id,
+    const project = new Project({activeSiteModelName: siteModelName})
+    const siteModel = geoJsonFeatureCollectionToSiteModel(featureCollection, project.id, siteModelName)
+    return Project.copyOf(project, updated => {
+        updated.activeSiteModel = siteModel
+    })
+}
+
+export function geoJsonFeatureCollectionToSiteModel(
+    featureCollection: FeatureCollection,
+    projectID: string,
+    siteModelName: string
+): SiteModel{
+    return new SiteModel({
+        name: siteModelName,
+        projectID: projectID,
         version: 0,
         versionCount: 1,
         roofFacets: featureCollection.features
             .filter((feature) => feature.properties?.type === "RoofFacet")
             .map((feature) => geoJsonFeatureToRoofFacet(feature)),
     });
-
-    return Project.copyOf(project, updated => {
-        updated.activeSiteModel = siteModel
-    })
 }
 
 export function projectToGeoJsonFeatureCollection(
@@ -92,7 +100,7 @@ export function siteModelToGeoJsonFeatureCollection(siteModel: SiteModel): GeoJs
 
 export function removeRoofFacetFromSiteModel(siteModel: SiteModel): SiteModel {
     const newRoofFacets = siteModel?.roofFacets ? [...siteModel.roofFacets] : [];
-    if (newRoofFacets.length > 0) newRoofFacets.splice(-1, 1);
+    if (newRoofFacets.length > 0) newRoofFacets.shift();
     return SiteModel.copyOf(siteModel, (updated) => {
         updated.versionCount += 1
         updated.roofFacets = newRoofFacets;

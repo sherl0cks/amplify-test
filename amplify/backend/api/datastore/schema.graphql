@@ -2,113 +2,114 @@
 # sort key
 
 type Project
-  @model
-  @key(
+@model
+@key(
     name: "byProspectID"
     fields: ["prospectID"]
     queryField: "listProjectsByProspectId"
-  ) 
-  {
-  id: ID!
-  prospectID: String
-  activeSiteModelName: String
-  activeSiteModel: SiteModel @connection
-  siteModels: [SiteModel!] @connection(keyName: "byProjectID", fields: ["id"])
-  activeDesign: Design @connection
-  designs: [Design] @connection(keyName: "byProjectID", fields: ["id"])
+)
+{
+    id: ID!
+    prospectID: String
+    activeSiteModelName: String
+    activeSiteModel: SiteModel @connection
+    siteModelNames: [String!]
+    siteModels: [SiteModel!] @connection(keyName: "byProjectID", fields: ["id"])
+    activeDesign: Design @connection
+    designs: [Design] @connection(keyName: "byProjectID", fields: ["id"])
 }
 
-type SiteModel 
-  @model
-  @key(
+type SiteModel
+@model
+@key(
     name: "byProjectID"
     fields: ["projectID", "name", "version"]
     queryField: "listSiteModelsByProjectId"
-  )
+)
 {
-  id: ID!
-  name: String!
-  version: Int!
-  versionCount: Int!
-  projectID: ID!
-  trees: [Tree!]
-  roofFacets: [RoofFacet!]
-  roofObstructions: [RoofObstruction!]
+    id: ID!
+    name: String!
+    version: Int!
+    versionCount: Int!
+    projectID: ID!
+    trees: [Tree!]
+    roofFacets: [RoofFacet!]
+    roofObstructions: [RoofObstruction!]
 }
 
 
 type Tree {
-  id: ID!
+    id: ID!
 }
 
 type RoofFacet {
-  type: String!
-  geometry: Polygon!
-  properties: RoofFacetProperties!
-  bbox: [Float]
+    type: String!
+    geometry: Polygon!
+    properties: RoofFacetProperties!
+    bbox: [Float]
 }
 
 type RoofFacetProperties {
-  id: ID!
-  type: String
+    id: ID!
+    type: String
 }
 
 type Polygon {
-  type: String!
-  coordinatesString: AWSJSON!
+    type: String!
+    coordinatesString: AWSJSON!
 }
 
 type RoofObstruction {
-  id: ID!
+    id: ID!
 }
 
 # # Is this one aggregate boundary or should it be broken further.
 type Design
-  @model
-  @key(
+@model
+@key(
     name: "byProjectID"
     fields: ["projectID"]
     queryField: "listDesignsByProjectId"
-  )
-  @key(
+)
+@key(
     name: "bySiteModelID"
     fields: ["siteModelID"]
     queryField: "listDesignsBySiteModelId"
-  ) {
-  id: ID!
-  projectID: ID!
-  siteModelID: ID!
-  layout: Layout
-  stringing: Stringing
-  # storage
-  # other stuff
+) {
+    id: ID!
+    projectID: ID!
+    siteModelID: ID!
+    layout: Layout
+    stringing: Stringing
+    # storage
+    # other stuff
 }
 
 type Layout {
-  id: ID!
-  modulePlacements: [ModulePlacement]
-  moduleSpecification: ModuleSpecification
+    id: ID!
+    modulePlacements: [ModulePlacement]
+    moduleSpecification: ModuleSpecification
 }
 
 type ModuleSpecification {
-  id: ID!
+    id: ID!
 }
 
 type ModulePlacement {
-  id: ID!
+    id: ID!
 }
 
 type Stringing {
-  id: ID!
-  inverterSelections: [InverterSelection]
+    id: ID!
+    inverterSelections: [InverterSelection]
 }
 
 type InverterSpecification {
-  id: ID!
+    id: ID!
 }
 
 type InverterSelection {
-  id: ID!
-  inverterSpecification: InverterSpecification
-  quantity: Int
+    id: ID!
+    inverterSpecification: InverterSpecification
+    quantity: Int
 }
